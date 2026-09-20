@@ -202,6 +202,20 @@ The React application separates reusable components, API service functions, and 
 
 Axios is used for communication between the React frontend and Laravel REST API.
 
+
+## Assumptions Made
+
+* The application is intended for internal project management use by a digital agency.
+* Authentication and authorization were considered optional and were not implemented because they were not required for the core assessment.
+* Each project belongs to a single client represented by the `client_name` field; a separate client management entity was not required by the assessment.
+* Status and priority values are limited to the values specified in the assessment.
+* The backend REST API is the authoritative source for validation and business rules.
+* The frontend communicates with the backend through the `/api/projects` REST endpoints.
+* Project deletion is permanent because soft deletion was not specified as a requirement.
+* MySQL is used as the database for the submitted implementation.
+* Sample project records are provided through the database seeder to make the application immediately testable after setup.
+
+
 ## AI Tool Disclosure
 
 ChatGPT was used as an AI development assistant during the assessment for implementation guidance, code structure suggestions, debugging assistance, validation guidance, and technical review.

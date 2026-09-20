@@ -1,58 +1,209 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Client Project Tracker
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A simple full-stack Client Project Tracker developed as part of the Full Stack Developer Technical Assessment.
 
-## About Laravel
+The application allows project managers to create, view, update, and delete client projects while tracking project status, priority, start dates, and due dates.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Tech Stack
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Backend
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+* Laravel 13
+* PHP 8.5
+* MySQL
+* Laravel REST API
+* Eloquent ORM
 
-## Learning Laravel
+### Frontend
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+* React 19
+* TypeScript
+* Tailwind CSS 4
+* Axios
+* Vite
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Features
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+* View all client projects
+* Create new projects
+* Edit existing projects
+* Delete projects
+* Project status management
+* Project priority management
+* Start and due date management
+* Backend validation
+* Frontend validation and error handling
+* Responsive interface
+* Database seeding with sample project data
 
-## Agentic Development
+## Project Statuses
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+* Planning
+* In Progress
+* On Hold
+* Completed
 
-```bash
-composer require laravel/boost --dev
+## Project Priorities
 
-php artisan boost:install
+* Low
+* Medium
+* High
+
+## Architecture
+
+The application uses a separated frontend and backend architecture.
+
+```text
+React + TypeScript
+       |
+     Axios
+       |
+Laravel REST API
+       |
+    Eloquent
+       |
+     MySQL
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+The Laravel backend is responsible for API endpoints, validation, database operations, and API responses.
 
-## Contributing
+The React frontend is responsible for the user interface, form handling, user interactions, and communication with the REST API.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+This separation keeps frontend and backend responsibilities clear and allows the API to potentially be consumed by other clients in the future.
 
-## Code of Conduct
+## API Endpoints
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Method | Endpoint             | Description          |
+| ------ | -------------------- | -------------------- |
+| GET    | `/api/projects`      | Get all projects     |
+| GET    | `/api/projects/{id}` | Get a single project |
+| POST   | `/api/projects`      | Create a project     |
+| PUT    | `/api/projects/{id}` | Update a project     |
+| DELETE | `/api/projects/{id}` | Delete a project     |
 
-## Security Vulnerabilities
+## Validation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+The backend validates the following:
 
-## License
+* Client name is required.
+* Project name is required.
+* Status must be one of the supported values.
+* Priority must be one of the supported values.
+* Due date cannot be earlier than the start date.
+* Invalid API requests return validation errors.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Requirements
+
+Before running the project, make sure the following are installed:
+
+* PHP 8.5+
+* Composer
+* Node.js
+* npm
+* MySQL
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/iammark989/client-project-tracker
+cd client-project-tracker
+```
+
+Install PHP dependencies:
+
+```bash
+composer install
+```
+
+Install frontend dependencies:
+
+```bash
+npm install
+```
+
+Create the environment file:
+
+```bash
+cp .env.example .env
+```
+
+On Windows PowerShell, you can use:
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Generate the Laravel application key:
+
+```bash
+php artisan key:generate
+```
+
+## Database Configuration
+
+Create a MySQL database and update the database settings in `.env`.
+
+Example:
+
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=client_project_tracker
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Run migrations and seed the sample projects:
+
+```bash
+php artisan migrate --seed
+```
+
+The database seeder includes sample project records for testing the application.
+
+## Running the Application
+
+Start the Laravel development server:
+
+```bash
+php artisan serve
+```
+
+In another terminal, start the Vite development server:
+
+```bash
+npm run dev
+```
+
+Open:
+
+```text
+http://127.0.0.1:8000
+```
+
+## Production Build
+
+To build the frontend assets:
+
+```bash
+npm run build
+```
+
+## Technical Decisions
+
+Laravel Form Request classes are used to keep validation rules separate from controller logic.
+
+Laravel API Resources are used to provide a consistent API response structure.
+
+The React application separates reusable components, API service functions, and TypeScript types to keep the frontend organized and maintainable.
+
+Axios is used for communication between the React frontend and Laravel REST API.
+
+## AI Tool Disclosure
+
+ChatGPT was used as an AI development assistant during the assessment for implementation guidance, code structure suggestions, debugging assistance, validation guidance, and technical review.
+
+The final application was integrated, tested, and verified against the assessment requirements.
